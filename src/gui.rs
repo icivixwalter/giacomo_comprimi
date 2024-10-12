@@ -8,7 +8,7 @@ const ESEGUIBILI_PATH: &str = r"c:\CASA\CDM\LeTorri";
 pub struct MyApp {
     // definito tutti i campi delle struttura
     // prova_checkbox: bool,
-    selected: Vec<bool>, // Stato delle checkbox (se selezionate o meno)
+    my_checkboxes: Vec<bool>, // Stato delle checkbox (se selezionate o meno)
     // executables: Vec<String>, // Lista di eseguibili trovati nella cartella todo: sostituisce con path del file esterno
     // combo_box_selection: String, // Opzione attualmente selezionata nella ComboBox
     // output: String, // Output catturato dagli eseguibili
@@ -18,7 +18,7 @@ pub struct MyApp {
 impl Default for MyApp {
     fn default() -> Self {
         Self {
-            selected: vec![false; 3],
+            my_checkboxes: vec![false; 3],
         }
     }
 }
@@ -29,13 +29,17 @@ impl App for MyApp {
     // implemento le CHECK BOX
     fn update(&mut self, ctx: &Context, frame: &mut Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            // for my_bool in self.selected.iter_mut() {
-                ui.checkbox(&mut self.selected[0], "2008");
-                ui.checkbox(&mut self.selected[1], "2009");
-                ui.checkbox(&mut self.selected[2], "2010");
+            // ui.checkbox(&mut self.selected[0], "2008");
+            // ui.checkbox(&mut self.selected[1], "2009");
+            // ui.checkbox(&mut self.selected[2], "2010");
 
+            let mut i =0;
 
-            // }
+            //definisco my_bool il valore i-esimo del vettore
+            for my_bool in self.my_checkboxes.iter_mut() {
+                ui.checkbox(my_bool, format!("{}", 2008 + i));
+                i += 1;
+            }
         });
     }
 }
