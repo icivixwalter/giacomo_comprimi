@@ -7,7 +7,7 @@ const ESEGUIBILI_PATH: &str = r"c:\CASA\CDM\LeTorri";
 // Struttura per l'applicazione che gestisce lo stato
 pub struct MyApp {
     // definito tutti i campi delle struttura
-    // prova_checkbox: bool,
+    checkbox_tutti: bool,
     my_checkboxes: Vec<bool>, // Stato delle checkbox (se selezionate o meno)
     // executables: Vec<String>, // Lista di eseguibili trovati nella cartella todo: sostituisce con path del file esterno
     // combo_box_selection: String, // Opzione attualmente selezionata nella ComboBox
@@ -18,7 +18,8 @@ pub struct MyApp {
 impl Default for MyApp {
     fn default() -> Self {
         Self {
-            my_checkboxes: vec![false; 3],
+            checkbox_tutti: false,          //la checkbox tutti base false
+            my_checkboxes: vec![false; 9],  //tutte le altre
         }
     }
 }
@@ -33,11 +34,30 @@ impl App for MyApp {
             // ui.checkbox(&mut self.selected[1], "2009");
             // ui.checkbox(&mut self.selected[2], "2010");
 
-            let mut i =0;
 
+
+            //INCOLONNA + VISUALIZZA IL VALORE IMPOSTATO IL VALORE FALSE/TRUE DELLA MEMORIA HEAP
+            let checkbox_tutti = ui.checkbox(&mut self.checkbox_tutti, "Tutti");
+            if checkbox_tutti.clicked() {
+                println!("Checkbox Tutti clicked");
+                for my_checkbox in self.my_checkboxes.iter_mut() {
+                    *my_checkbox = self.checkbox_tutti;  //permette la selezione delle check box in base al valore della prima
+                }
+            }
+
+
+            //INCOLONNA + VISUALIZZA IL VALORE CORRENTE DELL'HEAP DELLE CHECK BOX
             //definisco my_bool il valore i-esimo del vettore
+            let mut i =0;
             for my_bool in self.my_checkboxes.iter_mut() {
-                ui.checkbox(my_bool, format!("{}", 2008 + i));
+
+                let my_cartella = format!("{}", 2008 + i);
+                let checkbox = ui.checkbox(my_bool, &my_cartella);
+                if checkbox.clicked() {
+                    println!("Checkbox con indice {i} clicked, nome = {}", &my_cartella);
+                }
+
+
                 i += 1;
             }
         });
