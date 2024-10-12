@@ -1,3 +1,10 @@
+/*
+    IL TUTORIAL DELLE EGUI
+        in rust si trova qui:
+            https://github.com/emilk/egui/blob/master/crates/egui_demo_lib/src/demo/panels.rs
+*/
+
+
 use eframe::{App, Frame};
 use egui::Context;
 

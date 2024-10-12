@@ -13,7 +13,8 @@ use std::io::BufRead;
 // Funzione principale che avvia l'applicazione
 fn main() -> eframe::Result {
     let options = eframe::NativeOptions {
-        viewport: egui::ViewportBuilder::default().with_inner_size([320.0, 240.0]),
+        //@finestra@base@windosw_(crea la finestra base di larghezza ed altezza predefiniti)
+        viewport: egui::ViewportBuilder::default().with_inner_size([620.0, 320.0]), //larghezza+ altezza
         ..Default::default()
     };
     // attiva il ciclo di di rendering ed agni iterazione del ciclo chiama il metodo App::update()
