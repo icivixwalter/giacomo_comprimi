@@ -6,7 +6,7 @@
 
 
 use eframe::{App, Frame};
-use egui::Context;
+use egui::{Context, Ui};
 
 // Costante per il percorso della cartella contenente gli eseguibili
 const ESEGUIBILI_PATH: &str = r"c:\CASA\CDM\LeTorri";
@@ -43,7 +43,18 @@ impl App for MyApp {
             // ui.checkbox(&mut self.selected[2], "2010");
 
 
-            //NELLA MEMORIA HEAP    
+            //CREO IL BUTTON PRIMA DI TUTTO
+            //________________________________________________________________//
+                let btn_comprimi = ui.button("COMPRIMI");
+                if btn_comprimi.clicked() {
+                    //stampo il nome ed il valore della check box cliccata.
+                    println!("click Button comprimi");
+                }
+                ui.add_space(10.0);
+
+            //________________________________________________________________//
+
+            //NELLA MEMORIA HEAP
             //INCOLONNA + VISUALIZZA IL VALORE IMPOSTATO IL VALORE FALSE/TRUE DELLA MEMORIA HEAP
             let checkbox_tutti = ui.checkbox(&mut self.checkbox_tutti, "Tutti");
             if checkbox_tutti.clicked() {
@@ -57,7 +68,7 @@ impl App for MyApp {
             //CICLO DA 2008 +1 PER NOVE VOLTE COME IL VETTORE
             //INCOLONNA + VISUALIZZA IL VALORE CORRENTE DELL'HEAP DELLE CHECK BOX
             //definisco my_bool il valore i-esimo del vettore
-            let mut i =0;
+            let mut i = 0;
             for my_bool in self.my_checkboxes.iter_mut() {
                 //assegno alla variabile il nome della cartella costruita +1
                 let my_cartella = format!("{}", 2008 + i);
@@ -75,9 +86,6 @@ impl App for MyApp {
                     ui.label("2008 prova");
                 });
 
-
-
-
                 i += 1;
             }
         });
@@ -85,8 +93,7 @@ impl App for MyApp {
 }
 
 //TODO: come prendere per l'etichetta il nome della cartella finale
-  //    ed assegnalo all'etichetta della check box?? si trova i cartella.rs
-
+//    ed assegnalo all'etichetta della check box?? si trova i cartella.rs
 
 /*
 impl MyApp {
