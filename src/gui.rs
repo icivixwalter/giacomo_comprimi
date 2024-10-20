@@ -33,16 +33,17 @@ impl Default for MyApp {
 // App e' un trait = interfaccia = collezione di metodi non definiti
 // impl trait for struct/enum
 impl App for MyApp {
-    // Funzione di aggiornamento dell'interfaccia utente
+    //FUNZONE UPDATE DI AGGIORNAMENTO INTERFACCIA UTETENTE
+    // viene chiamata automaticamente con MyApp
     // implemento le CHECK BOX
-    fn update(&mut self, ctx: &Context, frame: &mut Frame) {
+    fn update(&mut self, ctx: &Context, _frame: &mut Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
             // ui.checkbox(&mut self.selected[0], "2008");
             // ui.checkbox(&mut self.selected[1], "2009");
             // ui.checkbox(&mut self.selected[2], "2010");
 
 
-
+            //NELLA MEMORIA HEAP    
             //INCOLONNA + VISUALIZZA IL VALORE IMPOSTATO IL VALORE FALSE/TRUE DELLA MEMORIA HEAP
             let checkbox_tutti = ui.checkbox(&mut self.checkbox_tutti, "Tutti");
             if checkbox_tutti.clicked() {
@@ -52,17 +53,29 @@ impl App for MyApp {
                 }
             }
 
-
+            //NELLA MEMORIA HEAP
+            //CICLO DA 2008 +1 PER NOVE VOLTE COME IL VETTORE
             //INCOLONNA + VISUALIZZA IL VALORE CORRENTE DELL'HEAP DELLE CHECK BOX
             //definisco my_bool il valore i-esimo del vettore
             let mut i =0;
             for my_bool in self.my_checkboxes.iter_mut() {
-
+                //assegno alla variabile il nome della cartella costruita +1
                 let my_cartella = format!("{}", 2008 + i);
-                let checkbox = ui.checkbox(my_bool, &my_cartella);
-                if checkbox.clicked() {
-                    println!("Checkbox con indice {i} clicked, nome = {}", &my_cartella);
-                }
+
+                //
+                ui.horizontal(|ui| {
+                    //assegno alla checkbox il valore bool + il nome costruito
+                    let checkbox = ui.checkbox(my_bool, &my_cartella);
+                    //evento click checkbox
+                    if checkbox.clicked() {
+                        //stampo il nome ed il valore della check box cliccata.
+                        println!("Checkbox con indice {i} clicked, nome = {}", &my_cartella);
+                    }
+
+                    ui.label("2008 prova");
+                });
+
+
 
 
                 i += 1;
@@ -70,6 +83,10 @@ impl App for MyApp {
         });
     }
 }
+
+//TODO: come prendere per l'etichetta il nome della cartella finale
+  //    ed assegnalo all'etichetta della check box?? si trova i cartella.rs
+
 
 /*
 impl MyApp {
